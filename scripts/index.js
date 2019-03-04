@@ -1,4 +1,4 @@
-/* global shoppingList, store, api */
+/* global shoppingList, store, api, Item */
 
 'use strict';
 
@@ -9,11 +9,3 @@ $(document).ready(function() {
 
 store.items.push(Item.create('apples'));
 
-fetch('https://thinkful-list-api.herokuapp.com/ei-student/items')
-  .then(res => res.json())
-  .then(data => console.log(data));
-
-api.getItems()
-  .then(res => console.log(res));
-
-console.log(api.BASE_URL);
