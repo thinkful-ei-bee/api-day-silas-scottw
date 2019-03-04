@@ -26,9 +26,22 @@ const api = (function(){
     });
   };
 
+  const updateItem = function(id, updateData){
+
+    const newData = JSON.stringify(updateData);
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'PATCH',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: newData,
+    });
+  };
+
 
   return {
     getItems,
     createItem,
+    updateItem,
   };
 })();
