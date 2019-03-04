@@ -40,15 +40,6 @@ const shoppingList = (function(){
     return items.join('');
   }
   
-  const renderFromServer = function() {
-    api.getItems()
-      .then(res => res.json())
-      .then((items) => {
-        items.forEach((item) => store.addItem(item));
-        console.log('renderFromServer ran', store.items);
-        render();
-      });
-  };
   
 
   function render() {
@@ -70,6 +61,16 @@ const shoppingList = (function(){
     // insert that HTML into the DOM
     $('.js-shopping-list').html(shoppingListItemsString);
   }
+
+  const renderFromServer = function() {
+    api.getItems()
+      .then(res => res.json())
+      .then((items) => {
+        items.forEach((item) => store.addItem(item));
+        console.log('renderFromServer ran', store.items);
+        render();
+      });
+  };
   
   
   function handleNewItemSubmit() {
@@ -77,9 +78,12 @@ const shoppingList = (function(){
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
-      api.createItem(newItemName);
-      store.items.length = 0;
-      renderFromServer();
+      api.createItem(newItemName)
+        .then(res => res.json())
+        .then((newItem) => {
+          store.addItem(newItem);
+          render();
+        });
     });
   }
   
