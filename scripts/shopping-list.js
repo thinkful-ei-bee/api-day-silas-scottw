@@ -45,7 +45,7 @@ const shoppingList = (function(){
       .then(res => res.json())
       .then((items) => {
         items.forEach((item) => store.addItem(item));
-        console.log(store.items);
+        console.log('renderFromServer ran', store.items);
         render();
       });
   };
@@ -78,6 +78,7 @@ const shoppingList = (function(){
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
       api.createItem(newItemName);
+      store.items.length = 0;
       renderFromServer();
     });
   }

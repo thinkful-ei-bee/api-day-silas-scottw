@@ -10,14 +10,16 @@ const api = (function(){
 
   const createItem = function(name){
     const newItem = JSON.stringify({
+      name
+    });
+
+    return fetch(`${BASE_URL}/items`, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
       body: newItem,
     });
-
-    return fetch(`${BASE_URL}/items`, newItem);
   };
 
 
