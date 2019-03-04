@@ -14,7 +14,7 @@ const api = (function(){
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: name,
+      body: newItem,
     });
 
     return fetch(`${BASE_URL}/items`, newItem);

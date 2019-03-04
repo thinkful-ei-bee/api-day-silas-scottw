@@ -1,5 +1,5 @@
 'use strict';
-/* global store, $ */
+/* global store, api $, */
 
 // eslint-disable-next-line no-unused-vars
 const shoppingList = (function(){
@@ -40,7 +40,17 @@ const shoppingList = (function(){
     return items.join('');
   }
   
+  const renderFromServer = function() {
+    api.getItems()
+      .then(res => res.json())
+      .then((items) => {
+        items.forEach((item) => store.addItem(item));
+        console.log(store.items);
+        render();
+      });
+  };
   
+
   function render() {
     // Filter item list if store prop is true by item.checked === false
     let items = [ ...store.items ];
@@ -67,8 +77,8 @@ const shoppingList = (function(){
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
-      store.addItem(newItemName);
-      render();
+      api.createItem(newItemName);
+      renderFromServer();
     });
   }
   
@@ -146,5 +156,6 @@ const shoppingList = (function(){
   return {
     render: render,
     bindEventListeners: bindEventListeners,
+    renderFromServer
   };
 }());
