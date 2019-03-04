@@ -9,6 +9,10 @@ const api = (function(){
   };
 
   const createItem = function(name){
+
+    if (!name) {
+      throw new TypeError('name is empty');
+    }
     const newItem = JSON.stringify({
       name
     });
