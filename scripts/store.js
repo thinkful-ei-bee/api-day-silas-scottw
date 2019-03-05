@@ -17,8 +17,7 @@ const store = (function(){
 
   const findAndUpdate = function(id, newData){
     let item = this.items.filter(item => item.id === id)[0];
-    console.log('findAndUpdate newData = ', newData);
-    Object.assign(item, { name: newData });
+    Object.assign(item, newData);
   };
 
   const toggleCheckedFilter = function() {

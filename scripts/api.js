@@ -28,8 +28,7 @@ const api = (function(){
 
   const updateItem = function(id, updateData){
 
-    console.log('updateItem ran');
-    const newData = JSON.stringify({ name: updateData });
+    const newData = JSON.stringify(updateData);
 
     return fetch(`${BASE_URL}/items/${id}`, {
       method: 'PATCH',
