@@ -2,7 +2,7 @@
 
 const api = (function(){
 
-  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/silas-scottw';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/silas';
 
   const getItems = function(){
     return fetch(`${BASE_URL}/items`);
@@ -28,7 +28,9 @@ const api = (function(){
 
   const updateItem = function(id, updateData){
 
-    const newData = JSON.stringify(updateData);
+    console.log('updateItem ran');
+    const newData = JSON.stringify({ name: updateData });
+
     return fetch(`${BASE_URL}/items/${id}`, {
       method: 'PATCH',
       headers: new Headers({

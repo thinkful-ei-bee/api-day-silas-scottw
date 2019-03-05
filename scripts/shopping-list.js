@@ -63,13 +63,7 @@ const shoppingList = (function(){
   }
 
   const renderFromServer = function() {
-    api.getItems()
-      .then(res => res.json())
-      .then((items) => {
-        items.forEach((item) => store.addItem(item));
-        console.log('renderFromServer ran', store.items);
-        render();
-      });
+
   };
   
   
@@ -118,7 +112,9 @@ const shoppingList = (function(){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = $(event.currentTarget).find('.shopping-item').val();
-      store.findAndUpdateName(id, itemName);
+      console.log('itemName = ', itemName);
+      api.updateItem(id, itemName);
+      store.findAndUpdate(id, itemName);
       store.setItemIsEditing(id, false);
       render();
     });
